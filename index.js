@@ -1,47 +1,4 @@
-const { Connection } = require('pg');
-const { Sequelize, Model, DataTypes } = require('sequelize');
-
-
-const sequelize = new Sequelize('API', 'postgres', 'postgres', {
-    host: 'localhost',
-    dialect: 'postgres'
-  });
-
-Conectar = async () => {
-    try {
-        await sequelize.authenticate();
-        console.log('Connection has been established successfully.');
-      } catch (error) {
-        console.error('Unable to connect to the database:', error);
-    }
-}
-
-Conectar()
-
-const Usuario = sequelize.define('Usuario', {
-  // Model attributes are defined here
-  nome: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  email: {
-    type: DataTypes.STRING,
-    primaryKey: true
-  },
-  nascimento:{
-    type: DataTypes.DATE
-  }
-}, {
-  // Other model options go here
-});
-
-
-async function sincronizar(){
-  await Usuario.sync();
-  console.log("Sincronizado");
-} 
-
-// sincronizar();
+const Usuario = require('./model/usuario');
 
 async function criarUsuarios(usuario){
   await Usuario.create(usuario);
