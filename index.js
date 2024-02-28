@@ -4,16 +4,12 @@ const app = express()
 app.use(express.json());
 const port = 3000
 
-app.get('/hello/:nome', (req, res) => {
-  res.send(`Hello ${req.params.nome}!`)
-})
+const usuarioRouter = require('./routers/UsuarioRouter');
+app.use('/usuarios', usuarioRouter);
 
-app.post('Hello', (req, res) => {
-  res.status(201).json(req.body.nome)
-})
 
-app.listen(port, () =>{
+app.listen(port, () => {
   console.log('Example app listening on port ${port}')
-})
+});
 
 
