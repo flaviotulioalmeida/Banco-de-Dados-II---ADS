@@ -29,7 +29,7 @@ const criarUsuario = async (req, res ) => {
 
 const deletarUsario = async (req, res) => {
     try{
-        const usuario = await Usuario.findByPk(email);
+        const usuario = await Usuario.findByPk(req.params.email);
         await usuario.destroy();
         res.status( 200 ).json({message: "Usuario deletado com sucesso"});
     }catch(exeption){
@@ -38,31 +38,22 @@ const deletarUsario = async (req, res) => {
     }   
 };
 
-// const atualizarUsario = (user) async
-
-
-module.exports = { listarUsuario, buscarUsuario, criarUsuario, deletarUsario };
-
-
-
-
-
-
-// // criarUsuarios({
-// //   nome: "Jumenta do IF",
-// //   email: "jumentadoif@gmail.com",
-// //   nascimento: "2000-01-01"
-// // });
-
-// async function atualizarUsario(email, nome){
-//   const usuario = await Usuario.findByPk(email);
-//   usuario.nome = nome;
-//   await usuario.save();
-//   console.log("Usuarios atualizados");
-// }
-
-// // atualizarUsario("tulio@gmail.com", "Flavio Tulio Almeida");
+const atualizarUsarios = async (req, res) => {
+    try {
+         const usuario = await Usuario.findByPk(req.params.email);
+        console.log('query', req.query);
+        console.log('query', req.body);
+        
+        await usuario.update({
+            nome:req.body.nome
+        });
+        res.status( 200 ).json({message: "Usuario atualizado com sucesso"});
+    }catch(exeption) {
+        res.status( 404 ).json({erro: "not found"});
+        return;
+    }
+};
 
 
 
-
+module.exports = { listarUsuario, buscarUsuario, criarUsuario, deletarUsario, atualizarUsarios };
