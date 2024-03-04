@@ -1,8 +1,7 @@
-const { Connection } = require('pg');
 const { Sequelize, Model } = require('sequelize');
+require('dotenv').config()
 
-
-const sequelize = new Sequelize('API', 'postgres', 'postgres', {
+const sequelize = new Sequelize(process.env.POSTGRES_DATABASE, process.env.POSTGRES_USER, process.env.POSTGRES_PASSWORD, {
     host: 'localhost',
     dialect: 'postgres'
   });
