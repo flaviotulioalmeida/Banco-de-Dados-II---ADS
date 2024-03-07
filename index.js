@@ -1,9 +1,8 @@
-
 const express = require('express')
 const app = express()
 app.use(express.json());
 
-const port = process.env.API_PORT 
+const port = process.env.API_PORT;
 
 const usuarioRouter = require('./routers/UsuarioRouter');
 app.use('/usuarios', usuarioRouter);
